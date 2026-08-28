@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Prevent theme flash: apply stored/system theme before paint -->
+  <style>
+    html {
+      background-color: #F4F6F3;
+      color: #101512;
+    }
+
+    html.dark {
+      background-color: #090E0C;
+      color: #EEF5F1;
+    }
+  </style>
+  <script>
+    (function () {
+      try {
+        var savedTheme = localStorage.getItem('theme') || localStorage.getItem('dharun_portfolio_theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var useDark =
+          savedTheme === 'dark' ||
+          (savedTheme === 'system' && prefersDark) ||
+          (!savedTheme && prefersDark);
+
+        if (useDark) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (e) { }
+    })();
+  </script>
+
+  <!-- Primary Meta Tags -->
+  <title>Dharun MR | AI & Data Science Portfolio</title>
+  <meta name="title" content="Dharun MR | AI & Data Science Portfolio" />
+  <meta name="description"
+    content="Personal portfolio of Dharun MR - AI and Data Science B.Tech student specializing in Machine Learning, Deep Learning, NLP, Data Analysis, and Data Visualization." />
+  <meta name="author" content="Dharun MR" />
+  <meta name="keywords"
+    content="Dharun MR, AI, Data Science, Machine Learning, Deep Learning, Data Analysis, Portfolio, Python, Java, PowerBI, SQL" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Dharun MR | AI & Data Science Portfolio" />
+  <meta property="og:description"
+    content="Personal portfolio of Dharun MR - AI and Data Science B.Tech student specializing in Machine Learning, Deep Learning, NLP, Data Analysis, and Data Visualization." />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:title" content="Dharun MR | AI & Data Science Portfolio" />
+  <meta property="twitter:description"
+    content="Personal portfolio of Dharun MR - AI and Data Science B.Tech student specializing in Machine Learning, Deep Learning, NLP, Data Analysis, and Data Visualization." />
+
+  <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+</head>
+
+<body class="antialiased min-h-screen">
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>

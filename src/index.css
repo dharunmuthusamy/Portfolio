@@ -1,0 +1,312 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Default Light Mode palette */
+  :root {
+    --bg-main: #F4F6F3;
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #ECEFEB;
+    --text-primary: #101512;
+    --text-secondary: #667069;
+    --text-muted: #7A877E;
+    --border-color: #D8DED9;
+    --emerald-primary: #059669;
+    --emerald-hover: #047857;
+    --emerald-soft: #E6F4ED;
+    --emerald-accent: #10B981;
+
+    /* Semantic aliases */
+    --background: var(--bg-main);
+    --background-secondary: var(--bg-secondary);
+    --surface: var(--bg-primary);
+    --foreground: var(--text-primary);
+    --border: var(--border-color);
+    --accent: var(--emerald-primary);
+    --accent-dark: var(--emerald-hover);
+
+    --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  /* Charcoal + Emerald Dark Mode palette */
+  .dark {
+    --bg-main: #090E0C;
+    --bg-primary: #111A16;
+    --bg-secondary: #101815;
+    --text-primary: #EEF5F1;
+    --text-secondary: #8C9A92;
+    --text-muted: #64746B;
+    --border-color: #233129;
+    --emerald-primary: #10B981;
+    --emerald-hover: #34D399;
+    --emerald-soft: #102D22;
+    --emerald-accent: #059669;
+
+    /* Semantic aliases */
+    --background: var(--bg-main);
+    --background-secondary: var(--bg-secondary);
+    --surface: var(--bg-primary);
+    --foreground: var(--text-primary);
+    --border: var(--border-color);
+    --accent: var(--emerald-primary);
+    --accent-dark: var(--emerald-hover);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    background-color: var(--background);
+    color: var(--foreground);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    line-height: 1.7;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  :focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--accent);
+  }
+
+  ::selection {
+    background-color: var(--emerald-soft);
+    color: var(--emerald-primary);
+  }
+}
+
+@layer components {
+
+  /* ── Shared content container ─────────────────────── */
+  .container-main {
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .container-main {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-main {
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+    }
+  }
+
+  /* ── Section base ─────────────────────────────────── */
+  .section-base {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    scroll-margin-top: 80px;
+  }
+
+  @media (min-width: 640px) {
+    .section-base {
+      padding-top: 120px;
+      padding-bottom: 120px;
+    }
+  }
+
+  /* Decorative section tag (e.g., "01 / ABOUT") */
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--emerald-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  /* Section heading */
+  .section-heading {
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    line-height: 1.15;
+  }
+
+  @media (min-width: 640px) {
+    .section-heading {
+      font-size: 38px;
+    }
+  }
+
+  .section-rule {
+    width: 2.5rem;
+    height: 2px;
+    background-color: var(--emerald-primary);
+    border-radius: 9999px;
+    margin-top: 0.75rem;
+    margin-bottom: 2.5rem;
+  }
+
+  /* ── Card primitive ───────────────────────────────── */
+  .card-surface {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 0.875rem;
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card-surface:hover {
+    border-color: var(--emerald-primary);
+  }
+
+  /* ── Primary button (emerald) ─────────────────────── */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--emerald-primary);
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 14px 0 color-mix(in srgb, var(--accent) 25%, transparent);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--emerald-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px 0 color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+
+  /* ── Secondary button ─────────────────────────────── */
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 0.875rem;
+    border: 1px solid var(--border-color);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--bg-primary);
+    border-color: var(--emerald-primary);
+    color: var(--emerald-primary);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary:active {
+    transform: translateY(0);
+  }
+
+  /* ── Skill/tech tag — emerald tint ───────────────── */
+  .tag-emerald {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    font-family: var(--font-mono);
+    background-color: var(--emerald-soft);
+    color: var(--emerald-primary);
+    border: 1px solid var(--border-color);
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+
+  /* ── Skill/tech tag — neutral ─────────────────────── */
+  .tag-neutral {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    font-family: var(--font-sans);
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+
+  .tag-neutral:hover {
+    border-color: var(--emerald-primary);
+    color: var(--text-primary);
+  }
+}
+
+/* Line-mask utility for kinetic typography reveals */
+.line-mask {
+  overflow: hidden;
+  display: block;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--emerald-primary);
+}
+
+/* Lenis Smooth Scroll CSS resets */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
