@@ -6,6 +6,37 @@
   <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+  <!-- Prevent theme flash: apply stored/system theme before paint -->
+  <style>
+    html {
+      background-color: #F4F6F3;
+      color: #101512;
+    }
+
+    html.dark {
+      background-color: #090E0C;
+      color: #EEF5F1;
+    }
+  </style>
+  <script>
+    (function () {
+      try {
+        var savedTheme = localStorage.getItem('theme') || localStorage.getItem('dharun_portfolio_theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var useDark =
+          savedTheme === 'dark' ||
+          (savedTheme === 'system' && prefersDark) ||
+          (!savedTheme && prefersDark);
+
+        if (useDark) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (e) { }
+    })();
+  </script>
+
   <!-- Primary Meta Tags -->
   <title>Dharun MR | AI & Data Science Portfolio</title>
   <meta name="title" content="Dharun MR | AI & Data Science Portfolio" />
@@ -27,17 +58,16 @@
   <meta property="twitter:description"
     content="Personal portfolio of Dharun MR - AI and Data Science B.Tech student specializing in Machine Learning, Deep Learning, NLP, Data Analysis, and Data Visualization." />
 
-  <!-- Google Fonts: Inter -->
+  <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
     rel="stylesheet">
-  <script type="module" crossorigin src="./assets/index-61MVQCMT.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-BTIsylnH.css">
+  <script type="module" crossorigin src="./assets/index-CpnP3VWG.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BPhakfTZ.css">
 </head>
 
-<body
-  class="bg-slate-50 dark:bg-[#090d16] text-slate-900 dark:text-slate-100 font-sans antialiased min-h-screen transition-colors duration-200">
+<body class="antialiased min-h-screen">
   <div id="root"></div>
 </body>
 

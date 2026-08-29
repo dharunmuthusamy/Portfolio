@@ -47,6 +47,10 @@ export function MobileMenu({ isOpen, onClose, navItems, activeSection }: MobileM
 
           {/* Drawer */}
           <motion.div
+            id="mobile-menu"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile Navigation Menu"
             initial={{ y: '-100%', opacity: 0 }}
             animate={{ y: '0%', opacity: 1 }}
             exit={{ y: '-100%', opacity: 0 }}

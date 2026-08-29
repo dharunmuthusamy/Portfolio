@@ -25,6 +25,8 @@ export interface Education {
   boardOrUniversity?: string;
   period: string;
   grade?: string;
+  cgpa?: string;
+  percentage?: string;
 }
 
 export interface SkillItem {
@@ -69,6 +71,8 @@ export interface Certification {
   date: string;
   category?: string;
   credentialUrl?: string;
+  credentialId?: string;
+  skills?: string[];
 }
 
 export interface ExtracurricularActivity {
@@ -86,6 +90,7 @@ export interface Achievement {
   organization?: string;
   date?: string;
   period?: string;
+  category?: string;
   description?: string;
 }
 

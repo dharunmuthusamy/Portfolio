@@ -263,6 +263,106 @@
     border-color: var(--emerald-primary);
     color: var(--text-primary);
   }
+
+  /* ── Glassmorphism UI primitives ─────────────────── */
+  .glass-card {
+    background: color-mix(in srgb, var(--bg-primary) 65%, transparent);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid color-mix(in srgb, var(--border-color) 70%, transparent);
+    box-shadow: 0 16px 35px -10px rgba(0, 0, 0, 0.07), inset 0 1px 1px 0 rgba(255, 255, 255, 0.4);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .dark .glass-card {
+    background: color-mix(in srgb, var(--bg-primary) 50%, transparent);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
+  }
+
+  .glass-card:hover {
+    border-color: var(--emerald-primary);
+    box-shadow: 0 20px 40px -10px color-mix(in srgb, var(--emerald-primary) 20%, transparent);
+  }
+
+  /* Glass pill button */
+  .glass-pill-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.85rem;
+    border-radius: 9999px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    background: color-mix(in srgb, var(--bg-primary) 70%, transparent);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 0.925rem;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  }
+
+  .glass-pill-btn:hover {
+    background: color-mix(in srgb, var(--bg-primary) 90%, transparent);
+    border-color: var(--emerald-primary);
+    color: var(--emerald-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--emerald-primary) 20%, transparent);
+  }
+
+  .btn-pill-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    border-radius: 9999px;
+    background-color: var(--emerald-primary);
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 0.925rem;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 8px 25px -5px color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+
+  .btn-pill-primary:hover {
+    background-color: var(--emerald-hover);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 12px 30px -4px color-mix(in srgb, var(--accent) 60%, transparent);
+  }
+
+  /* Glass typography for background name */
+  .glass-name-text {
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    user-select: none;
+    -webkit-text-stroke: 2px color-mix(in srgb, var(--emerald-primary) 60%, transparent);
+    background: linear-gradient(180deg, 
+      color-mix(in srgb, var(--emerald-primary) 50%, transparent) 0%, 
+      color-mix(in srgb, var(--emerald-primary) 25%, transparent) 55%, 
+      transparent 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 15px 30px color-mix(in srgb, var(--emerald-primary) 30%, transparent));
+  }
+
+  .dark .glass-name-text {
+    -webkit-text-stroke: 1.5px color-mix(in srgb, var(--emerald-hover) 50%, transparent);
+    background: linear-gradient(180deg, 
+      color-mix(in srgb, var(--emerald-hover) 40%, transparent) 0%, 
+      color-mix(in srgb, var(--emerald-primary) 18%, transparent) 55%, 
+      transparent 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 20px 50px color-mix(in srgb, var(--emerald-primary) 35%, transparent));
+  }
 }
 
 /* Line-mask utility for kinetic typography reveals */

@@ -99,6 +99,7 @@ export function Navbar() {
               onClick={() => setMobileMenuOpen(true)}
               aria-label="Open navigation menu"
               aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-menu"
               className="p-2 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-secondary)] border border-transparent hover:border-[var(--border-color)] transition-all"
             >
               <Menu className="w-5 h-5" aria-hidden="true" />

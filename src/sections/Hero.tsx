@@ -1,114 +1,151 @@
+import { useRef } from 'react';
 import { portfolioData } from '../data/portfolio';
-import { SocialLinks } from '../components/SocialLinks';
-import { FileText, ArrowRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 export function Hero() {
   const { personalInfo } = portfolioData;
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Mouse tilt / 3D parallax
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springConfig = { damping: 25, stiffness: 150, mass: 0.5 };
+
+  // Parallax layers
+  const textParallaxX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-35, 35]), springConfig);
+  const textParallaxY = useSpring(useTransform(mouseY, [-0.5, 0.5], [-20, 20]), springConfig);
+
+  const photoParallaxX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-15, 15]), springConfig);
+  const photoParallaxY = useSpring(useTransform(mouseY, [-0.5, 0.5], [-10, 10]), springConfig);
+
+  const cardParallaxX = useSpring(useTransform(mouseX, [-0.5, 0.5], [25, -25]), springConfig);
+  const cardParallaxY = useSpring(useTransform(mouseY, [-0.5, 0.5], [20, -20]), springConfig);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const normalizedX = (e.clientX - rect.left) / rect.width - 0.5;
+    const normalizedY = (e.clientY - rect.top) / rect.height - 0.5;
+    mouseX.set(normalizedX);
+    mouseY.set(normalizedY);
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
+
+  const traits = [
+    'Machine Learning',
+    'Deep Learning',
+    'Data Analytics',
+    'Computer Vision',
+    'Problem Solver',
+  ];
 
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center pt-[72px] relative overflow-hidden bg-[var(--bg-main)]"
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative w-full h-screen min-h-[800px] overflow-hidden select-none font-sans bg-[var(--bg-main)]"
     >
-      {/* Subtle background gradient — emerald glow */}
-      <div
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] rounded-full blur-[140px] pointer-events-none -z-10 opacity-30"
-        style={{ backgroundColor: 'var(--emerald-primary)' }}
-      />
+      {/* Giant Background Name - Using glass-name-text utility */}
+      <motion.div 
+        style={{ x: textParallaxX, y: textParallaxY }}
+        className="absolute top-[15%] left-0 w-full flex justify-center z-10 pointer-events-none"
+      >
+        <motion.h1
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: 'easeOut' }}
+          className="text-[25vw] tracking-[-0.07em] leading-none glass-name-text m-0 p-0"
+          style={{ lineHeight: '0.8' }}
+        >
+          DHARUN
+        </motion.h1>
+      </motion.div>
 
-      <div className="container-main w-full py-16 sm:py-24 lg:py-0">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-12 items-center min-h-[calc(100vh-72px)]">
-
-          {/* Left: Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-7 flex flex-col items-start gap-6 py-8 lg:py-16"
-          >
-            {/* Greeting + Name */}
-            <div className="flex flex-col gap-2">
-              <span className="text-[16px] font-medium tracking-wide text-[var(--text-secondary)]">
-                Hello, I'm
-              </span>
-              <div className="overflow-hidden">
-                <motion.h1
-                  initial={{ y: '100%' }}
-                  animate={{ y: 0 }}
-                  transition={{ delay: 0.3, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                  className="text-[44px] sm:text-[62px] lg:text-[70px] font-extrabold tracking-tight leading-[1.05] text-[var(--text-primary)]"
-                >
-                  {personalInfo.name}<span style={{ color: 'var(--emerald-primary)' }}>.</span>
-                </motion.h1>
-              </div>
-            </div>
-
-            {/* Role */}
-            <h2 className="text-[20px] sm:text-[24px] font-semibold leading-snug text-[var(--text-secondary)]">
-              AI &amp; Data Science Student
-            </h2>
-
-            {/* Description */}
-            <p className="text-[15px] sm:text-[16px] max-w-xl leading-[1.8] text-[var(--text-secondary)]">
-              Pursuing B.Tech in Artificial Intelligence &amp; Data Science at Dr. MCET.
-              Focused on building machine learning models, deep learning solutions, data
-              visualisations, and intelligent analytics to solve real-world challenges.
-            </p>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
-              <a href="#projects" className="btn-primary group">
-                <span>View Projects</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-              </a>
-              <a
-                href={personalInfo.resumePdfPath}
-                download="Dharun_MR_Resume.pdf"
-                className="btn-secondary"
-              >
-                <FileText className="w-4 h-4" style={{ color: 'var(--emerald-primary)' }} aria-hidden="true" />
-                <span>Download Resume</span>
-              </a>
-            </div>
-
-            {/* Social links */}
-            <div className="flex items-center gap-4 pt-2">
-              <span className="text-xs font-mono uppercase tracking-widest text-[var(--text-muted)]">Connect</span>
-              <div className="h-px w-8 bg-[var(--border-color)]" />
-              <SocialLinks />
-            </div>
-          </motion.div>
-
-          {/* Right: Profile photo */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-5 flex justify-center lg:justify-end"
-          >
-            <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[360px] lg:h-[360px] xl:w-[400px] xl:h-[400px] group">
-              {/* Emerald glow aura */}
-              <div
-                className="absolute -inset-1 rounded-2xl blur-xl opacity-40 group-hover:opacity-70 transition-opacity duration-500 -z-10"
-                style={{ background: 'linear-gradient(to right, var(--emerald-primary), var(--emerald-accent))' }}
-              />
-              <div
-                className="w-full h-full rounded-2xl overflow-hidden border shadow-2xl relative"
-                style={{ borderColor: 'var(--border-color)', backgroundColor: 'var(--bg-primary)' }}
-              >
-                <img
-                  src="./profile.png"
-                  alt={`${personalInfo.name} — AI & Data Science student`}
-                  className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
-              </div>
-            </div>
-          </motion.div>
-
-        </div>
+      {/* Portrait Cutout */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[85%] z-20 flex justify-center items-end pointer-events-none">
+        <motion.img
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
+          style={{ 
+            x: photoParallaxX, 
+            y: photoParallaxY,
+            filter: 'drop-shadow(0 25px 35px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 35px color-mix(in srgb, var(--emerald-primary) 20%, transparent))'
+          }}
+          src="./profile-cutout.png"
+          alt={personalInfo.name}
+          className="w-auto h-full max-h-[95%] object-contain object-bottom drop-shadow-2xl"
+        />
       </div>
+
+      {/* Center Headline & Buttons */}
+      <div className="absolute bottom-[10%] left-1/2 -translate-x-1/2 z-40 flex flex-col items-center w-full max-w-4xl text-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="flex gap-4 mt-8"
+        >
+          <a 
+            href="#projects"
+            className="btn-pill-primary tracking-wide"
+          >
+            View Projects
+          </a>
+          <a 
+            href="#about"
+            className="glass-pill-btn tracking-wide"
+          >
+            About Me
+          </a>
+        </motion.div>
+      </div>
+
+      {/* Floating Glass Card 1: Specialization (Left Lower) */}
+      <motion.div 
+        initial={{ opacity: 0, x: -30 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+        style={{ x: cardParallaxX, y: cardParallaxY }}
+        className="absolute bottom-[20%] left-[5%] md:left-[12%] z-30 glass-card flex items-center gap-4 p-4 pr-6 rounded-2xl shadow-2xl"
+      >
+        <div className="relative flex items-center justify-center w-10 h-10 rounded-full bg-[var(--emerald-primary)]/10 border border-[var(--emerald-primary)]/20">
+          <div className="absolute w-2.5 h-2.5 rounded-full bg-[var(--emerald-primary)] animate-ping opacity-60" />
+          <div className="relative w-2.5 h-2.5 rounded-full bg-[var(--emerald-primary)]" />
+        </div>
+        <div className="flex flex-col">
+          <span className="text-[10px] uppercase tracking-widest text-[var(--text-muted)] font-bold mb-0.5">Specialization</span>
+          <span className="text-sm font-extrabold text-[var(--text-primary)]">Deep Learning &amp; Vision</span>
+        </div>
+      </motion.div>
+
+      {/* Floating Glass Card 3: Traits (Right Mid) */}
+      <motion.div 
+        initial={{ opacity: 0, x: 30 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.8 }}
+        style={{ x: cardParallaxX, y: cardParallaxY }}
+        className="absolute top-[52%] right-[12%] z-30 w-52 glass-card flex flex-col gap-3 p-6 rounded-2xl shadow-2xl"
+      >
+        {traits.map((trait, i) => (
+          <div key={i} className="flex items-center gap-3 group cursor-default">
+            <div className="relative flex items-center justify-center w-3 h-3">
+              <div className="absolute w-1.5 h-1.5 rounded-full bg-[var(--emerald-primary)]/40 group-hover:scale-150 group-hover:bg-[var(--emerald-primary)]/60 transition-all duration-300" />
+              <div className="relative w-1.5 h-1.5 rounded-full bg-[var(--emerald-primary)]" />
+            </div>
+            <span className="text-[var(--text-primary)] font-bold text-[14px] group-hover:text-[var(--emerald-primary)] transition-colors duration-300">{trait}</span>
+          </div>
+        ))}
+      </motion.div>
+
     </section>
   );
 }
+

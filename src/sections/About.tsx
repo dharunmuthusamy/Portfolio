@@ -84,7 +84,7 @@ export function About() {
           >
             <div
               className="flex flex-col divide-y rounded-xl overflow-hidden shadow-lg"
-              style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border-color)', border: '1px solid var(--border-color)', divideColor: 'var(--border-color)' }}
+              style={{ backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border-color)', border: '1px solid var(--border-color)' }}
             >
               {[
                 { Icon: BookOpen, label: 'Degree', primary: currentEdu.degree, secondary: currentEdu.fieldOfStudy },
