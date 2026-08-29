@@ -79,7 +79,7 @@ export function Hero() {
             y: photoParallaxY,
             filter: 'drop-shadow(0 25px 35px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 35px color-mix(in srgb, var(--emerald-primary) 20%, transparent))'
           }}
-          src="https://drive.google.com/uc?export=view&id=1G1LPxrEvH-8EJdl6dhRIG3gB5oZys2Hg"
+          src="./assets/images/dharun-hero.png"
           alt={personalInfo.name}
           className="w-auto h-full max-h-[95%] object-contain object-bottom drop-shadow-2xl"
         />
