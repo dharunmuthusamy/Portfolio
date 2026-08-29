@@ -84,7 +84,8 @@ export function Navbar() {
             <ThemeToggle />
             <a
               href={resumePdfPath}
-              download="Dharun_MR_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-primary text-[13px] py-1.5 px-4"
             >
               <FileText className="w-3.5 h-3.5" aria-hidden="true" />

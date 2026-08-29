@@ -109,7 +109,8 @@ export function MobileMenu({ isOpen, onClose, navItems, activeSection }: MobileM
             <div className="pt-2 border-t border-[var(--border-color)]">
               <a
                 href={resumePdfPath}
-                download="Dharun_MR_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={onClose}
                 className="btn-primary w-full text-[14px] py-3"
               >

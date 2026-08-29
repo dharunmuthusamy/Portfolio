@@ -12,7 +12,7 @@ export const portfolioData: PortfolioData = {
     linkedinUrl: "https://linkedin.com/in/dharunmr/",
     objective:
       "Passionate about AI and Data Science, aiming to apply strong programming, problem-solving, and data visualization skills to real-world challenges. Seeking an internship to grow as a collaborative and impact-driven tech professional.",
-    resumePdfPath: "./Dharun_MR_Resume.pdf",
+    resumePdfPath: "https://drive.google.com/file/d/19_wajlMVVLidFsTCF9puqOeXjWa6Ykpf/view?usp=sharing",
   },
 
   areasOfInterest: [
