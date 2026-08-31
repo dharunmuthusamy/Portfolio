@@ -69,7 +69,7 @@ export function Hero() {
       </motion.div>
 
       {/* Portrait Cutout */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[65%] sm:h-[75%] md:h-[85%] z-20 flex justify-center items-end pointer-events-none">
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[75%] sm:h-[80%] md:h-[85%] z-20 flex justify-center items-end pointer-events-none">
         <motion.img
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -79,9 +79,9 @@ export function Hero() {
             y: photoParallaxY,
             filter: 'drop-shadow(0 25px 35px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 35px color-mix(in srgb, var(--emerald-primary) 20%, transparent))'
           }}
-          src="./assets/images/dharun-hero.png?v=2"
+          src="./assets/images/dharun-hero.png?v=3"
           alt={personalInfo.name}
-          className="w-auto h-full max-h-[95%] object-contain object-bottom drop-shadow-2xl"
+          className="w-auto h-full max-h-[95%] max-w-none object-contain object-bottom drop-shadow-2xl"
         />
       </div>
 
