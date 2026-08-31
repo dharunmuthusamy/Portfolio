@@ -61,7 +61,7 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: 'easeOut' }}
-          className="text-[25vw] tracking-[-0.07em] leading-none glass-name-text m-0 p-0"
+          className="text-[22vw] md:text-[25vw] tracking-[-0.07em] leading-none glass-name-text m-0 p-0"
           style={{ lineHeight: '0.8' }}
         >
           DHARUN
@@ -69,7 +69,7 @@ export function Hero() {
       </motion.div>
 
       {/* Portrait Cutout */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[85%] z-20 flex justify-center items-end pointer-events-none">
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] h-[65%] sm:h-[75%] md:h-[85%] z-20 flex justify-center items-end pointer-events-none">
         <motion.img
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -114,7 +114,7 @@ export function Hero() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.6 }}
         style={{ x: cardParallaxX, y: cardParallaxY }}
-        className="absolute bottom-[20%] left-[5%] md:left-[12%] z-30 glass-card flex items-center gap-4 p-4 pr-6 rounded-2xl shadow-2xl"
+        className="absolute bottom-[20%] left-[5%] md:left-[12%] z-30 hidden md:flex glass-card items-center gap-4 p-4 pr-6 rounded-2xl shadow-2xl"
       >
         <div className="relative flex items-center justify-center w-10 h-10 rounded-full bg-[var(--emerald-primary)]/10 border border-[var(--emerald-primary)]/20">
           <div className="absolute w-2.5 h-2.5 rounded-full bg-[var(--emerald-primary)] animate-ping opacity-60" />
@@ -132,7 +132,7 @@ export function Hero() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.8 }}
         style={{ x: cardParallaxX, y: cardParallaxY }}
-        className="absolute top-[52%] right-[12%] z-30 w-52 glass-card flex flex-col gap-3 p-6 rounded-2xl shadow-2xl"
+        className="absolute top-[52%] right-[12%] z-30 w-52 hidden md:flex glass-card flex-col gap-3 p-6 rounded-2xl shadow-2xl"
       >
         {traits.map((trait, i) => (
           <div key={i} className="flex items-center gap-3 group cursor-default">
