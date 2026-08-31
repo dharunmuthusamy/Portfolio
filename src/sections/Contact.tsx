@@ -27,6 +27,7 @@ export function Contact() {
     try {
       // NOTE: Web3Forms access keys are safe to be public as they only allow sending emails to you.
       // We include it directly here so it works perfectly when deployed via GitHub Pages.
+      // @ts-ignore
       const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "a94afabe-184c-43e4-bd88-77f71faea5e7";
       
       if (accessKey === "YOUR_WEB3FORMS_ACCESS_KEY_HERE") {
