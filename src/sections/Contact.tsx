@@ -13,6 +13,7 @@ export function Contact() {
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormState((s) => ({ ...s, [e.target.name]: e.target.value }));
@@ -21,11 +22,45 @@ export function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
+    setSubmitError('');
 
-    // Simulate form submission (no backend configured)
-    await new Promise((resolve) => setTimeout(resolve, 1200));
-    setSubmitting(false);
-    setSubmitted(true);
+    try {
+      // NOTE: Web3Forms access keys are safe to be public as they only allow sending emails to you.
+      // We include it directly here so it works perfectly when deployed via GitHub Pages.
+      const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "a94afabe-184c-43e4-bd88-77f71faea5e7";
+      
+      if (accessKey === "YOUR_WEB3FORMS_ACCESS_KEY_HERE") {
+        setSubmitError('Web3Forms access key is missing. Please configure it in .env or directly in the code.');
+        setSubmitting(false);
+        return;
+      }
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          name: formState.name,
+          email: formState.email,
+          message: formState.message,
+        }),
+      });
+
+      const result = await response.json();
+      
+      if (result.success) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(result.message || 'Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      setSubmitError('Failed to send message. Please check your internet connection.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const contactLinks = [
@@ -172,6 +207,12 @@ export function Contact() {
                 </div>
               ) : (
                 <form id="contact-form" onSubmit={handleSubmit} className="flex flex-col gap-5" noValidate>
+                  {submitError && (
+                    <div className="p-3 rounded-lg border text-sm" style={{ backgroundColor: 'rgba(239, 68, 68, 0.1)', borderColor: 'rgba(239, 68, 68, 0.2)', color: 'rgb(239, 68, 68)' }}>
+                      {submitError}
+                    </div>
+                  )}
+                  
                   <div className="flex flex-col gap-1.5">
                     <label htmlFor="contact-name" className="text-[12px] font-mono font-medium uppercase tracking-wider" style={{ color: 'var(--text-muted)' }}>
                       Your Name
